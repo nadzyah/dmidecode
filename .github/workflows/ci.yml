@@ -108,4 +108,4 @@ jobs:
           shared-key: "rust-msrv"
 
       - name: cargo build
-        run: cargo build --profile ${{ matrix.cargo_profile }} --all-features
+        run: cargo build --profile ${{ matrix.cargo_profile }} --all-features --locked
