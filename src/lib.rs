@@ -898,27 +898,27 @@ mod tests {
 
     #[test]
     fn structure_strings() {
-        use pretty_assertions::assert_eq;
+        use pretty_assertions::assert_eq as pretty_assert_eq;
         use std::prelude::v1::*;
 
         let regular_bytes = &[65, 66, 67, 0, 68, 69, 0, 70, 0, 71, 72, 73, 0, 0];
         let regular_ss = StructureStrings::new(regular_bytes).collect::<Vec<_>>();
-        assert_eq!(vec!["ABC", "DE", "F", "GHI"], regular_ss, "Regular bytes");
+        pretty_assert_eq!(vec!["ABC", "DE", "F", "GHI"], regular_ss, "Regular bytes");
 
         let zero_bytes = &[0, 0];
         let zero_ss = StructureStrings::new(zero_bytes).collect::<Vec<_>>();
-        assert_eq!(vec![""; 0], zero_ss, "Zero bytes");
+        pretty_assert_eq!(vec![""; 0], zero_ss, "Zero bytes");
 
         let no_tail_bytes = &[65, 66, 67, 0, 68, 69, 0, 70, 0, 71, 72, 73];
         let no_tail_ss = StructureStrings::new(no_tail_bytes).collect::<Vec<_>>();
-        assert_eq!(vec!["ABC", "DE", "F", "GHI"], no_tail_ss, "Regular bytes");
+        pretty_assert_eq!(vec!["ABC", "DE", "F", "GHI"], no_tail_ss, "Regular bytes");
 
         let invalid_order1_bytes = &[65, 66, 67, 0, 0, 68, 69, 0, 0, 0, 0, 0];
         let invalid_order1_ss = StructureStrings::new(invalid_order1_bytes).collect::<Vec<_>>();
-        assert_eq!(vec!["ABC"], invalid_order1_ss, "Invalid order 1 bytes");
+        pretty_assert_eq!(vec!["ABC"], invalid_order1_ss, "Invalid order 1 bytes");
 
         let invalid_order2_bytes = &[0, 0, 65, 66, 67];
         let invalid_order2_ss = StructureStrings::new(invalid_order2_bytes).collect::<Vec<&str>>();
-        assert_eq!(vec![""; 0], invalid_order2_ss, "Invalid order 2 bytes");
+        pretty_assert_eq!(vec![""; 0], invalid_order2_ss, "Invalid order 2 bytes");
     }
 }
